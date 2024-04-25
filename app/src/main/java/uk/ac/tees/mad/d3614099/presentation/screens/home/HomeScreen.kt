@@ -4,7 +4,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,12 +20,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,28 +36,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.d3614099.R
 import uk.ac.tees.mad.d3614099.data.SignupViewModel
-import uk.ac.tees.mad.d3614099.navigation.Screen
-import uk.ac.tees.mad.d3614099.navigation.ScreenRouter
-import uk.ac.tees.mad.d3614099.presentation.screens.profile.ProfileData
+import uk.ac.tees.mad.d3614099.presentation.common.ButtonComponent
+import uk.ac.tees.mad.d3614099.presentation.common.HeadingTextComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navController: NavController = rememberNavController(),
-    loginViewModel: SignupViewModel = viewModel(),
-    userProfile: ProfileData = ProfileData(
-        name = "John Doe",
-        profileImage = 0
-    )
+    loginViewModel: SignupViewModel = viewModel()
 ) {
     Surface(
         modifier = Modifier
@@ -66,72 +59,38 @@ fun HomeScreen(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Text(
-                        text = "Welcome ${userProfile.name}",
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Row {
-                        Icon(
-                            imageVector = Icons.Filled.LocationOn,
-                            contentDescription = null
-                        )
-                        Text(
-                            text = userProfile.location,
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(id = R.drawable.profile_pic),
-                    contentDescription = "Image",
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(CircleShape)
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            shape = CircleShape
-                        )
-                        .clickable {
-                            ScreenRouter.navigateTo(Screen.ProfileScreen)
-                        },
-                    contentScale = ContentScale.Crop
-                )
-            }
+            Text(
+                text = "Welcome",
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier
+            )
 
             LazyColumn(modifier = Modifier.weight(1.0f)) {
                 items(roomDataList) { room ->
-                    RoomCard(room = room) {
-                        // Navigate to Detail Screen on click
-                        ScreenRouter.navigateToDetailScreen(room.hashCode())
-                    }
+                    RoomCard(room = room)
                 }
             }
+
+
+//            HeadingTextComponent(value = stringResource(id = R.string.home_screen))
+//            Spacer(modifier = Modifier.height(20.dp))
+//
+//            ButtonComponent(
+//                value = "Logout", onButtonClicked = {
+//                    loginViewModel.logout()
+//                }, isEnabled = true
+//            )
         }
     }
 }
 
 @Composable
-fun RoomCard(room: RoomData, onClick: () -> Unit) {
+fun RoomCard(room: RoomData) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .clickable(onClick = onClick)
     ) {
         Column {
             Box(modifier = Modifier.height(200.dp)) {
@@ -230,14 +189,8 @@ fun ImagePager(images: List<Int>) {
 }
 
 
-//@Preview(showSystemUi = true, showBackground = true)
-//@Composable
-//fun HomeScreenPreview() {
-//    HomeScreen(
-//        SignupViewModel(),
-//        userProfile = ProfileData(
-//            name = "John Doe",
-//            profileImage = 0
-//        )
-//    )
-//}
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    HomeScreen(SignupViewModel())
+}

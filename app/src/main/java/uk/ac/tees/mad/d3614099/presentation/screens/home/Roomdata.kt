@@ -9,8 +9,7 @@ data class RoomData(
     val rentalDuration: String,
     val price: String,
     val ownerName: String,
-    val ownerImage: Int,
-    val ownerContact: String
+    val ownerImage: Int
 )
 
 val roomDataList = listOf(
@@ -24,8 +23,7 @@ val roomDataList = listOf(
         rentalDuration = "6 months",
         price = "£2000",
         ownerName = "John Doe",
-        ownerImage = R.drawable.profile_pic,
-        ownerContact = "1234567890"
+        ownerImage = R.drawable.profile_pic
 
     ),
     RoomData(
@@ -38,8 +36,7 @@ val roomDataList = listOf(
         rentalDuration = "5 months",
         price = "£5000",
         ownerName = "Zesica",
-        ownerImage = R.drawable.profile_pic_2,
-        ownerContact = "1234567890"
+        ownerImage = R.drawable.profile_pic_2
     ),
     RoomData(
         images = listOf(
@@ -51,8 +48,7 @@ val roomDataList = listOf(
         rentalDuration = "16 months",
         price = "£19000",
         ownerName = "Christ",
-        ownerImage = R.drawable.profile_pic,
-        ownerContact = "1234567890"
+        ownerImage = R.drawable.profile_pic
     ),
     RoomData(
         images = listOf(
@@ -64,7 +60,8 @@ val roomDataList = listOf(
         rentalDuration = "4 months",
         price = "£1000",
         ownerName = "John Doe",
-        ownerImage = R.drawable.profile_pic_2,
-        ownerContact = "1234567890"
+        ownerImage = R.drawable.profile_pic_2
+    ),
+
+
     )
-)
