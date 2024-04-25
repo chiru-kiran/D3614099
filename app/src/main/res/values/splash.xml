@@ -4,7 +4,7 @@
     <style name="App.Starting.Theme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#FFFF</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/icon2</item>
-        <item name="postSplashScreenTheme">@style/App.Starting.Theme</item>
+        <item name="postSplashScreenTheme">@style/Theme.Roommate</item>
     </style>
 
 </resources>

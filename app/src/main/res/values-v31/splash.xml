@@ -5,6 +5,6 @@
         <item name="android:windowSplashScreenBackground">#FFFF</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/icon2</item>
         <item name="android:windowSplashScreenAnimationDuration">50000</item>
-        <item name="postSplashScreenTheme">@style/App.Starting.Theme</item>
+        <item name="postSplashScreenTheme">@style/Theme.Roommate</item>
     </style>
 </resources>
