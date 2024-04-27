@@ -18,12 +18,13 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ProfileInfoCard(
     icon: ImageVector,
-    text: String
+    text: String,
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { },
+            .clickable {onClick() },
         elevation = CardDefaults.cardElevation(5.dp),
     ) {
 
@@ -62,6 +63,7 @@ fun ProfileInfoCard(
 fun ProfileInfoCardPreview() {
     ProfileInfoCard(
         icon = Icons.Default.Person,
-        text = "John Doe"
+        text = "John Doe",
+        onClick = {}
     )
 }

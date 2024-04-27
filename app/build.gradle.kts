@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -61,6 +62,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.material)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,14 +77,32 @@ dependencies {
 
     //Splash Api
     implementation("androidx.core:core-splashscreen:1.0.1")
-
     implementation("androidx.compose.material:material-icons-extended:1.6.4")
-
-    implementation ("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx")
+    // firebase storage
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // coil for asyncImage
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    //implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.6.5")
+
+    // Permissions library to request permissions - by quadri
+    implementation ("com.google.accompanist:accompanist-permissions:0.35.0-alpha")
+
+    // Location library to get user's location
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
+
+    // Gson library to convert json to object
+    implementation ("com.google.code.gson:gson:2.8.9")
 
 }

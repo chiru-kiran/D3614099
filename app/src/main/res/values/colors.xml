@@ -22,5 +22,8 @@
     <color name="input_background">#fff</color>
     <color name="placeholder">#A0A3BD</color>
     <color name="shimmer">#C3C3C3</color>
+    <color name="signout">#DD4B4B</color>
+    <color name="fab">#8B9DFF</color>
+
 
 </resources>

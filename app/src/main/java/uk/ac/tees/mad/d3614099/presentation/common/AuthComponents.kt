@@ -1,17 +1,12 @@
 package uk.ac.tees.mad.d3614099.presentation.common
 
-import android.graphics.drawable.shapes.Shape
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Logout
 //import androidx.compose.material.icons.filled.Logout
@@ -32,7 +27,6 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -97,6 +91,7 @@ fun HeadingTextComponent(value: String) {
     )
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTextFieldComponent(
@@ -140,8 +135,130 @@ fun MyTextFieldComponent(
     )
 }
 
+@Composable
+fun MyTextFieldComponent2(
+    labelValue: String,
+//    painterResource: Painter,
+    onTextChanged: (String) -> Unit
+) {
 
-@OptIn(ExperimentalMaterial3Api::class)
+    val textValue = remember {
+        mutableStateOf("")
+    }
+    val localFocusManager = LocalFocusManager.current
+
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(componentShape.small),
+        label = { Text(text = labelValue) },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = colorResource(id = R.color.colorPrimary),
+            unfocusedTextColor = colorResource(id = R.color.black),
+            cursorColor = colorResource(id = R.color.colorPrimary),
+            focusedBorderColor = colorResource(id = R.color.colorPrimary),
+            unfocusedBorderColor = colorResource(id = R.color.black),
+            focusedLabelColor = colorResource(id = R.color.colorPrimary),
+            unfocusedLabelColor = colorResource(id = R.color.black),
+        ),
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next
+        ),
+        singleLine = true,
+        maxLines = 1,
+        value = textValue.value,
+        onValueChange = {
+            textValue.value = it
+            onTextChanged(it)
+        }
+//        leadingIcon = {
+//            Icon(painter = painterResource, contentDescription = "")
+//        }
+    )
+}
+
+@Composable
+fun MyTextFieldComponentNumerical(
+    labelValue: String,
+//    painterResource: Painter,
+    onTextChanged: (String) -> Unit
+) {
+
+    val textValue = remember {
+        mutableStateOf("")
+    }
+    val localFocusManager = LocalFocusManager.current
+
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(componentShape.small),
+        label = { Text(text = labelValue) },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = colorResource(id = R.color.colorPrimary),
+            unfocusedTextColor = colorResource(id = R.color.black),
+            cursorColor = colorResource(id = R.color.colorPrimary),
+            focusedBorderColor = colorResource(id = R.color.colorPrimary),
+            unfocusedBorderColor = colorResource(id = R.color.black),
+            focusedLabelColor = colorResource(id = R.color.colorPrimary),
+            unfocusedLabelColor = colorResource(id = R.color.black),
+        ),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Next
+        ),
+        singleLine = true,
+        maxLines = 1,
+        value = textValue.value,
+        onValueChange = {
+            textValue.value = it
+            onTextChanged(it)
+        }
+//        leadingIcon = {
+//            Icon(painter = painterResource, contentDescription = "")
+//        }
+    )
+}
+
+@Composable
+fun MyTextFieldComponent3(
+    labelValue: String,
+//    painterResource: Painter,
+    onTextChanged: (String) -> Unit
+) {
+
+    val textValue = remember {
+        mutableStateOf("")
+    }
+    val localFocusManager = LocalFocusManager.current
+
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(componentShape.small),
+        label = { Text(text = labelValue) },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = colorResource(id = R.color.colorPrimary),
+            unfocusedTextColor = colorResource(id = R.color.black),
+            cursorColor = colorResource(id = R.color.colorPrimary),
+            focusedBorderColor = colorResource(id = R.color.colorPrimary),
+            unfocusedBorderColor = colorResource(id = R.color.black),
+            focusedLabelColor = colorResource(id = R.color.colorPrimary),
+            unfocusedLabelColor = colorResource(id = R.color.black),
+        ),
+//        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Unspecified),
+        maxLines = 2,
+        value = textValue.value,
+        onValueChange = {
+            textValue.value = it
+            onTextChanged(it)
+        }
+//        leadingIcon = {
+//            Icon(painter = painterResource, contentDescription = "")
+//        }
+    )
+}
+
 @Composable
 fun PasswordTextFieldComponent(
     labelValue: String, painterResource: Painter,
@@ -163,7 +280,7 @@ fun PasswordTextFieldComponent(
             .fillMaxWidth()
             .clip(componentShape.medium),
         label = { Text(text = labelValue) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = colorResource(id = R.color.colorPrimary),
             focusedLabelColor = colorResource(id = R.color.colorPrimary),
             cursorColor = colorResource(id = R.color.colorPrimary),
@@ -309,6 +426,44 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
 
         }
 
+    }
+}
+
+@Composable
+fun ButtonComponent2(value: String, onButtonClicked: () -> Unit) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(48.dp),
+        onClick = {
+            onButtonClicked.invoke()
+        },
+        contentPadding = PaddingValues(),
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        shape = RoundedCornerShape(50.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(48.dp)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        listOf(
+                            colorResource(id = R.color.colorPrimary),
+                            colorResource(id = R.color.colorSecondary)
+                        )
+                    ),
+                    shape = RoundedCornerShape(50.dp)
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = value,
+                fontSize = 18.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 

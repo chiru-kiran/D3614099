@@ -110,8 +110,9 @@ class SignupViewModel : ViewModel() {
             }
             .addOnFailureListener {
                 Log.d(TAG, "inside_OnFailure_Listener")
-                Log.d(TAG, "Exception = ${it.message}")
                 Log.d(TAG, "Exception = ${it.localizedMessage}")
+                signUpInProgress.value = false
+
             }
     }
 

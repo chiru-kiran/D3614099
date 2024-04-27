@@ -23,7 +23,6 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -37,9 +36,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import uk.ac.tees.mad.d3614099.R
 import uk.ac.tees.mad.d3614099.navigation.Screen
 import uk.ac.tees.mad.d3614099.navigation.ScreenRouter
@@ -47,10 +47,15 @@ import uk.ac.tees.mad.d3614099.navigation.SystemBackButtonHandler
 import uk.ac.tees.mad.d3614099.presentation.screens.home.ImagePager
 import uk.ac.tees.mad.d3614099.presentation.screens.home.RoomData
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun DetailScreen(room: RoomData) {
+fun DetailScreen(room:RoomData) {
+
+//    val navArgs = rememberNavController().currentBackStackEntry?.arguments
+//    val room = navArgs?.getParcelable<RoomData>("room")
+//    if (room!=null){
+//        DetailScreen(room = room)
+//    }
     val showContactDetails = remember { mutableStateOf(false) }
 
     val isClicked = remember {
@@ -96,7 +101,7 @@ fun DetailScreen(room: RoomData) {
                         contentDescription = null
                     )
                     Text(
-                        text = room.ownerContact,
+                        text = room.phone,
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -142,7 +147,7 @@ fun DetailScreen(room: RoomData) {
                         contentDescription = null
                     )
                     Text(
-                        text = room.city,
+                        text = room.location,
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold
@@ -150,7 +155,7 @@ fun DetailScreen(room: RoomData) {
                     Spacer(modifier = Modifier.weight(1f))
 
                     Text(
-                        text = "Duration: ${room.rentalDuration}",
+                        text = room.duration,
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 18.sp,
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -167,7 +172,7 @@ fun DetailScreen(room: RoomData) {
                             modifier = Modifier.padding(8.dp)
                         )
                         Text(
-                            text = "This is a beautiful room in the heart of the city. It is fully furnished and has all the amenities you need.",
+                            text = room.description,
                             style = MaterialTheme.typography.bodyMedium,
                             fontSize = 18.sp,
                             modifier = Modifier.padding(8.dp)
@@ -189,8 +194,9 @@ fun DetailScreen(room: RoomData) {
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(8.dp)
                     ) {
+                        val imageId = if (room.ownerImage != 0) room.ownerImage else R.drawable.profile_pic
                         Image(
-                            painter = painterResource(id = room.ownerImage),
+                            painter = painterResource(id = imageId),
                             contentDescription = "Owner Image",
                             modifier = Modifier
                                 .size(50.dp)
@@ -199,7 +205,7 @@ fun DetailScreen(room: RoomData) {
                         Spacer(modifier = Modifier.width(8.dp))
                         Column {
                             Text(
-                                text = room.ownerName,
+                                text = room.name,
                                 style = MaterialTheme.typography.headlineMedium
                             )
                         }
@@ -215,22 +221,22 @@ fun DetailScreen(room: RoomData) {
 }
 
 
-@Preview
-@Composable
-fun PreviewDetailScreen() {
-    DetailScreen(
-        room = RoomData(
-            images = listOf(
-                R.drawable.home_image1,
-                R.drawable.home_image2
-            ),
-            ownerImage = R.drawable.profile_pic,
-            city = "London",
-            rentalDuration = "1 year",
-            price = "£1000",
-            ownerName = "John Doe",
-            ownerContact = "+63 453456365"
-        )
-    )
-}
+//@Preview
+//@Composable
+//fun PreviewDetailScreen() {
+//    DetailScreen(
+//        room = RoomData(
+//            images = listOf(
+//                R.drawable.home_image1,
+//                R.drawable.home_image2
+//            ),
+//            ownerImage = R.drawable.profile_pic,
+//            city = "London",
+//            rentalDuration = "1 year",
+//            price = "£1000",
+//            ownerName = "John Doe",
+//            ownerContact = "+63 453456365"
+//        )
+//    )
+//}
 
